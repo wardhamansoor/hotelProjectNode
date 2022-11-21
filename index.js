@@ -1,4 +1,7 @@
 
+import dotenv from 'dotenv'
+dotenv.config()
+//require('dotenv').config();
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
@@ -13,7 +16,7 @@ import logInRoute from "./routes/loginroutes.js";
 //constant
 const port = process.env.PORT || 3000;
 const hostName="localhost";
-const url=process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/hotelProjectDb"
+const url=process.env.MONGODB_URI || "mongodb://localhost:27017/hotelProjectDb"
 
 const app= express();
 app.use(morgan('dev'));
@@ -29,6 +32,12 @@ client.then(()=>{
     console.log("Connection with database established!!")
 })
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+
 app.listen(port,hostName,()=>{
     console.log(`Server is listening at http://${hostName}:${port}`);
+    
 })
+
